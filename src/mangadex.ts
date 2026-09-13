@@ -87,6 +87,26 @@ export function chapterPages(chapters: Entity[], language: string, quality: stri
   return pages
 }
 
+export function mangaChapterDirectory(chapters: Entity[], pages: Page[]) {
+  const byId = new Map(chapters.map(chapter => [chapter.id, chapter]))
+  const groups = new Map<string, string[]>()
+  for (const page of pages) {
+    const id = page.sourcePageId.split(':')[0]
+    if (!groups.has(id)) groups.set(id, [])
+    groups.get(id)!.push(page.sourcePageId)
+  }
+  const compare = new Intl.Collator('en', { numeric: true }).compare
+  const ordered = [...groups].sort(([a], [b]) => {
+    const left = byId.get(a)!.attributes, right = byId.get(b)!.attributes
+    return compare(String(left.chapter ?? ''), String(right.chapter ?? '')) || compare(String(left.volume ?? ''), String(right.volume ?? '')) || a.localeCompare(b)
+  })
+  return ordered.map(([sourceChapterId, sourcePageIds], index) => {
+    const a = byId.get(sourceChapterId)!.attributes
+    const label = [a.volume ? `Vol. ${a.volume}` : '', a.chapter ? `Chapter ${a.chapter}` : 'Oneshot', a.title || ''].filter(Boolean).join(' · ')
+    return { sourceChapterId, titleOriginal: label, position: index + 1, sourcePageIds }
+  })
+}
+
 export function createMangaDex(fetcher: typeof fetch = sourceFetch, paceMs = 300) {
   let apiNext = 0, atHomeNext = 0
   let queue: Promise<unknown> = Promise.resolve()
@@ -154,9 +174,10 @@ export function createMangaDex(fetcher: typeof fetch = sourceFetch, paceMs = 300
     const result = await json(url, ctx)
     if (result.data?.id !== id || !result.data?.attributes) throw new Error('MangaDex returned an invalid title')
     if (!selected.ratings.includes(result.data.attributes.contentRating)) throw new Error('This title is excluded by the MangaDex content-rating setting')
-    const pages = chapterPages(await feed(id, ctx), selected.language, selected.quality)
+    const chapters = await feed(id, ctx)
+    const pages = chapterPages(chapters, selected.language, selected.quality)
     if (!pages.length) throw new Error(`No hosted MangaDex chapters in ${selected.language}. External-only chapters cannot be downloaded.`)
-    const value = { ...mangaSummary(result.data, selected.language), sourceNovelId: requestedId, pages }
+    const value = { ...mangaSummary(result.data, selected.language), sourceNovelId: requestedId, pages, mangaChapters: mangaChapterDirectory(chapters, pages) }
     if (metadataCache.size >= 8) metadataCache.delete(metadataCache.keys().next().value!)
     metadataCache.set(key, { expires: Date.now() + 60000, value }); return value
   }

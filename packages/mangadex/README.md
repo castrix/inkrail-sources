@@ -18,7 +18,7 @@ MangaDex is classified as a non-adult source (`SAFE`) and appears in the normal 
 
 Image quality defaults to `original`; choose `data-saver` for smaller images. Existing downloaded pages are retained; quality changes affect newly resolved page manifests/downloads.
 
-Use a `https://mangadex.org/title/<uuid>/...` URL when importing. A chapter URL is not a title identity. Chapters are presented as a single continuous page sequence because Inkrail protocol v1 does not have a separate multi-chapter manga navigation model. The adapter refuses incomplete or over-limit feeds instead of importing a partial book silently.
+Use a `https://mangadex.org/title/<uuid>/...` URL when importing. A chapter URL is not a title identity. Version 1.1.0 adds an optional `mangaChapters` directory with chapter titles and stable page IDs. Updated Inkrail clients show a chapter list with reading and download controls. Older clients can still use the continuous page list; existing page IDs and ordering are unchanged. The adapter refuses incomplete or over-limit feeds instead of importing a partial book silently.
 
 ## Network access
 

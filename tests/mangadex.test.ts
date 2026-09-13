@@ -1,5 +1,5 @@
 import { describe, it, expect, vi } from 'vitest'
-import { chapterPages, createMangaDex, mangaSummary, resolveMangaDexUrl, searchUrl } from '../src/mangadex'
+import { chapterPages, mangaChapterDirectory, createMangaDex, mangaSummary, resolveMangaDexUrl, searchUrl } from '../src/mangadex'
 
 const mangaId = '11111111-1111-4111-8111-111111111111'
 const chapterId = '22222222-2222-4222-8222-222222222222'
@@ -36,11 +36,24 @@ describe('MangaDex source', () => {
     expect(pages.map(p => p.sourcePageId)).toEqual([`${chapterId}:1`, `${chapterId}:2`, `${secondId}:1`, `${secondId}:2`])
     expect(pages[0].sourceUrl).toBe(`https://api.mangadex.org/at-home/server/${chapterId}#inkrail-page=0&quality=original`)
   })
+  it('orders the chapter directory numerically without changing existing page positions', () => {
+    const feed = [chapter(secondId, '26', { volume: null }), chapter(chapterId, '1')]
+    const pages = chapterPages(feed, 'en', 'original')
+    expect(pages[0].sourcePageId).toBe(`${secondId}:1`)
+    const directory = mangaChapterDirectory(feed, pages)
+    expect(directory.map(c => c.sourceChapterId)).toEqual([chapterId, secondId])
+    expect(directory[0].sourcePageIds).toEqual([`${chapterId}:1`, `${chapterId}:2`])
+    expect(pages[0].position).toBe(1)
+  })
   it('paginates the complete chapter feed without fetching every chapter image server', async () => {
     const { source, fetcher } = mocked([ok({ data: title }), ok({ data: [chapter()], total: 2 }), ok({ data: [chapter(secondId, '2')], total: 2 })])
     const value = await source.metadata({ id: `${mangaId}:en` }, { config: { language: 'id' } })
     expect(value.sourceNovelId).toBe(`${mangaId}:en`)
     expect(value.pages).toHaveLength(4)
+    expect(value.mangaChapters).toEqual([
+      { sourceChapterId: chapterId, titleOriginal: 'Vol. 1 · Chapter 1', position: 1, sourcePageIds: [`${chapterId}:1`, `${chapterId}:2`] },
+      { sourceChapterId: secondId, titleOriginal: 'Vol. 1 · Chapter 2', position: 2, sourcePageIds: [`${secondId}:1`, `${secondId}:2`] }
+    ])
     expect(fetcher).toHaveBeenCalledTimes(3)
     expect(new URL(fetcher.mock.calls[2][0]).searchParams.get('offset')).toBe('1')
     expect(new URL(fetcher.mock.calls[1][0]).searchParams.get('translatedLanguage[]')).toBe('en')
