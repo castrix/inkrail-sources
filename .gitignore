@@ -4,6 +4,7 @@ work/
 *.pem
 *.key
 .env*
+.keys/
 
 # Local-only adapters and their implementation/tests.
 packages/hentainexus/

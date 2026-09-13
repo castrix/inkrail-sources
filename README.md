@@ -8,6 +8,15 @@ Public adapters: TWKAN (novels) and MangaDex (multilingual chapter-based manga).
 
 See [MangaDex settings and behavior](packages/mangadex/README.md) for language selection, content visibility, stable chapter-page locators, and network requirements.
 
+## Install in Inkrail Open
+
+For end users, see the [extension import guide](docs/importing.md). In Inkrail Open **Extensions > Add repository**, use:
+
+- **Repository index URL:** `https://raw.githubusercontent.com/castrix/inkrail-sources/main/repository/index.json`
+- **Publisher SHA-256 fingerprint:** `cfc683ef1fc8e8504bbdb899ba839116eb6deb120b7aa07e18ca91bf1f624436`
+
+Confirm publisher trust, add the repository, then install **MangaDex** or **TWKAN** and select **Browse**. No app restart or rebuild is required. Use the index URL, not this GitHub page's URL.
+
 ## Test and build
 
 Requires Node.js 24 or newer.
@@ -23,7 +32,7 @@ Generate your own persistent Ed25519 signing key outside Git. Set `INKRAIL_SIGNI
 npm run build
 ```
 
-Publish only the contents of `dist/public/` to that directory. `public-packages.json` explicitly selects the public packages; ignored local adapters are never automatically discovered or bundled. Do not upload older files from the parent `dist/` folder. Build prints the SHA-256 fingerprint of the public key. Publish that fingerprint where users can independently verify it. Users add your `index.json` URL and fingerprint in Inkrail's Extensions page, trust the publisher, and install sources. There is no preconfigured public catalog in this checkout.
+Publish only the contents of `dist/public/` to that directory. `public-packages.json` explicitly selects the public packages; ignored local adapters are never automatically discovered or bundled. Do not upload older files from the parent `dist/` folder. Build prints the SHA-256 fingerprint of the public key. Publish that fingerprint where users can independently verify it. The maintained public catalog lives in `repository/`; see the [catalog update instructions](docs/importing.md#maintainers-update-the-public-catalog).
 
 For development, use a disposable key in ignored `work/`, set the release base to `http://127.0.0.1:4101/`, build, and run `npm run serve`. Do not use the local development key for public releases.
 
