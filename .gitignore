@@ -1,0 +1,18 @@
+node_modules/
+dist/
+work/
+*.pem
+*.key
+.env*
+
+# Local-only adapters and their implementation/tests.
+packages/hentainexus/
+packages/hitomi/
+packages/nhentai/
+src/adult-sources.ts
+src/parsers/hentainexus.ts
+src/parsers/hitomi.ts
+src/parsers/nhentai.ts
+tests/hentainexus.test.ts
+tests/hitomi.test.ts
+tests/nhentai.test.ts

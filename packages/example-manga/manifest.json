@@ -1,0 +1,21 @@
+{
+  "id": "example-manga",
+  "name": "Example Manga (synthetic)",
+  "version": "1.0.0",
+  "protocol": 1,
+  "entry": "index.mjs",
+  "mediaType": "MANGA",
+  "contentRating": "SAFE",
+  "language": "en",
+  "sourceLanguage": "en",
+  "baseUrl": "https://example.invalid",
+  "icon": "E",
+  "capabilities": [
+    "search",
+    "browse",
+    "asset",
+    "pages"
+  ],
+  "filters": [],
+  "settings": []
+}

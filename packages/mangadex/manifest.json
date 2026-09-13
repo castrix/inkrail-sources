@@ -1,0 +1,23 @@
+{
+  "id": "mangadex",
+  "name": "MangaDex",
+  "version": "1.0.0",
+  "protocol": 1,
+  "entry": "index.mjs",
+  "mediaType": "MANGA",
+  "contentRating": "ADULT",
+  "language": "Multilingual",
+  "sourceLanguage": "unknown",
+  "baseUrl": "https://mangadex.org",
+  "icon": "MD",
+  "capabilities": ["search", "browse", "pages", "asset", "resolve"],
+  "filters": [
+    { "key": "sort", "label": "Sort", "type": "select", "options": ["latest", "popular", "rating", "title"], "default": "latest" },
+    { "key": "status", "label": "Publication status", "type": "select", "options": ["all", "ongoing", "completed", "hiatus", "cancelled"], "default": "all" }
+  ],
+  "settings": [
+    { "key": "language", "label": "Chapter language code (en, id, ja, etc.)", "type": "text", "default": "en" },
+    { "key": "rating", "label": "Maximum content rating", "type": "select", "options": ["safe", "suggestive", "erotica", "pornographic"], "default": "suggestive" },
+    { "key": "quality", "label": "Page image quality", "type": "select", "options": ["original", "data-saver"], "default": "original" }
+  ]
+}

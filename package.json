@@ -1,0 +1,27 @@
+{
+  "name": "inkrail-sources",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "license": "MIT",
+  "engines": {
+    "node": ">=24"
+  },
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "test": "vitest run",
+    "check:public": "node scripts/check-public.mjs",
+    "serve": "node scripts/serve.mjs"
+  },
+  "dependencies": {
+    "cheerio": "^1.1.2",
+    "impit": "^0.13.0",
+    "playwright": "^1.55.0"
+  },
+  "devDependencies": {
+    "@types/node": "^24.13.4",
+    "esbuild": "^0.25.0",
+    "typescript": "^5.9.2",
+    "vitest": "^3.2.4"
+  }
+}

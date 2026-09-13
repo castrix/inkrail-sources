@@ -1,0 +1,22 @@
+{
+  "id": "example-novel",
+  "name": "Example Novel (synthetic)",
+  "version": "1.0.0",
+  "protocol": 1,
+  "entry": "index.mjs",
+  "mediaType": "NOVEL",
+  "contentRating": "SAFE",
+  "language": "en",
+  "sourceLanguage": "en",
+  "baseUrl": "https://example.invalid",
+  "icon": "E",
+  "capabilities": [
+    "search",
+    "browse",
+    "asset",
+    "chapters",
+    "chapter"
+  ],
+  "filters": [],
+  "settings": []
+}

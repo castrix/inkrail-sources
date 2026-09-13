@@ -1,0 +1,24 @@
+{
+  "id": "twkan",
+  "name": "TWKAN",
+  "version": "1.0.0",
+  "protocol": 1,
+  "entry": "index.mjs",
+  "mediaType": "NOVEL",
+  "contentRating": "SAFE",
+  "language": "zh-Hant",
+  "sourceLanguage": "zh-Hant",
+  "baseUrl": "https://twkan.com",
+  "icon": "T",
+  "capabilities": [
+    "search",
+    "browse",
+    "asset",
+    "resolve",
+    "chapters",
+    "chapter",
+    "browser"
+  ],
+  "filters": [],
+  "settings": []
+}
