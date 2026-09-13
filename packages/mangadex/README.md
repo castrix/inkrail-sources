@@ -22,7 +22,7 @@ Use a `https://mangadex.org/title/<uuid>/...` URL when importing. A chapter URL 
 
 ## Network access
 
-The adapter uses the host's normal network/DNS settings. It does not change DNS or bypass host network configuration. If MangaDex resolves to an ISP block page, API access will fail until a working connection/resolver is provided outside this package. Source-local test utilities under ignored `work/` are not part of the package.
+The adapter inherits Inkrail's DNS override settings. Cloudflare DNS-over-HTTPS is enabled by default; use the launcher's Advanced settings to disable it or choose compatible resolvers. Standalone runners can set `SCRAPER_DNS_ENABLED` and `SCRAPER_DNS_SERVERS` before startup. DNS override does not resolve every network access failure. Source-local test utilities under ignored `work/` are not part of the package.
 
 ## References
 

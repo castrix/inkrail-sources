@@ -1,4 +1,5 @@
 import { setTimeout as wait } from 'node:timers/promises'
+import { sourceFetch } from './network-fetch'
 import { retryAfterMilliseconds } from './source-rate-limit'
 
 const API = 'https://api.mangadex.org'
@@ -86,7 +87,7 @@ export function chapterPages(chapters: Entity[], language: string, quality: stri
   return pages
 }
 
-export function createMangaDex(fetcher: typeof fetch = fetch, paceMs = 300) {
+export function createMangaDex(fetcher: typeof fetch = sourceFetch, paceMs = 300) {
   let apiNext = 0, atHomeNext = 0
   let queue: Promise<unknown> = Promise.resolve()
   const homes = new Map<string, { expires: number; value: any }>()

@@ -49,3 +49,11 @@ Sources execute as trusted code under the host user's permissions. Separate proc
 ## License
 
 MIT for original source code. Bundled/upstream dependencies retain their licenses; see `THIRD_PARTY.md` and the lockfile. Preserve bundle legal comments and notices when distributing packages.
+
+## DNS override
+
+Cloudflare DNS-over-HTTPS is enabled by default for source requests. Set `SCRAPER_DNS_ENABLED=false` to use system DNS, or set `SCRAPER_DNS_SERVERS=1.1.1.1,1.0.0.1` to choose comma-separated resolver IPs. Custom resolvers must support HTTPS `/dns-query` with the Cloudflare-compatible JSON API and a valid certificate for their IP address. Ordinary UDP DNS servers are not supported by this setting.
+
+Inkrail Open exposes these options under **Advanced settings** in first-run setup and the tray **Settings** window. Save and restart to apply changes; source extensions inherit these settings. Core repository downloads also use the override. No Windows or router DNS settings are changed. HTTPS remains encrypted end to end; resolver failures are reported without silently falling back to system DNS. The resolver currently requires IPv4 answers (A records).
+
+For standalone source runners, set these environment variables before starting the process. Install the updated MangaDex/TWKAN package to receive DNS support in existing installations.
