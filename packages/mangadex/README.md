@@ -14,7 +14,7 @@ MangaDex API v5 adapter for Inkrail protocol v1. No account or API key is requir
 
 Language defaults to `en`; enter a MangaDex language code such as `id`, `ja`, or `pt-br` for another edition. Library identities include the language, so changing this setting does not mix chapters into books already saved in another language.
 
-Maximum content rating defaults to `suggestive` (safe + suggestive); choose safe, erotica, or pornographic to change it. Because this source can expose mature material, its protocol-v1 manifest is marked ADULT. Enable **Show adult sources** in Inkrail to see it in the source list; global search also requires adult-source visibility. This is a source-wide visibility flag, not a rating applied by MangaDex to every title.
+MangaDex is classified as a non-adult source (`SAFE`) and appears in the normal source list and global search. Maximum content rating defaults to `suggestive` (safe + suggestive); choose safe, erotica, or pornographic to change it. This source classification controls visibility in Inkrail; individual titles can have different MangaDex content ratings.
 
 Image quality defaults to `original`; choose `data-saver` for smaller images. Existing downloaded pages are retained; quality changes affect newly resolved page manifests/downloads.
 
