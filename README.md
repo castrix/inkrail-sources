@@ -1,5 +1,7 @@
 # Inkrail sources
 
+[Inkrail Open application](https://github.com/castrix/inkrail-open) · [Installable source packages](https://github.com/castrix/inkrail-sources)
+
 Independent source packages for Inkrail protocol v1. Website code lives here, not in the core application. Each package can be released, installed, and updated independently while Inkrail is running.
 
 Public adapters: TWKAN (novels) and MangaDex (multilingual chapter-based manga). The two `example-*` packages contain explicitly synthetic content for authoring and integration tests. None of these packages contains a downloaded library, user database, sessions, or private configuration. MangaDex retains its mixed-catalog content rating and visibility settings.
